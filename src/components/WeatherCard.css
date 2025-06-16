@@ -1,0 +1,16 @@
+.weather-card {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.weather-info {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.weather-info:last-child {
+  margin-bottom: 0;
+} 
