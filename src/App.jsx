@@ -5,7 +5,7 @@ import './components/CityButtons.css';
 import './components/WeatherCard.css';
 import { fetchWeather } from './api/weather';
 import SearchBox from './components/SearchBox';
-
+import Hello from './components/hello';
 // 한글 도시명을 영문으로 변환하는 매핑 객체
 const cityNameMapping = {
   '서울': 'Seoul',
@@ -78,6 +78,7 @@ function App() {
   return (
     <div className="app-container">
       <h1 className="app-title">날씨 앱 ⛅</h1>
+      <Hello />
       
       <CityButtons onCityClick={handleSearch} />
       
