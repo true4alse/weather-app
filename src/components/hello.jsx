@@ -1,5 +1,5 @@
 function Hello() {
-    return <h1>안녕하세요!헤헤</h1>;
+    return <h1>오신것을 환영합니다.</h1>;
 }
 
 export default Hello;

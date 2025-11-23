@@ -12,15 +12,14 @@ function SearchBox({ onSearch }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="도시명을 입력하세요 (예: Seoul)"
         value={city}
         onChange={(e) => setCity(e.target.value)}
-        style={{ padding: '10px', fontSize: '16px' }}
       />
-      <button type="submit" style={{ padding: '10px 20px', marginLeft: '10px' }}>
+      <button type="submit">
         검색
       </button>
     </form>

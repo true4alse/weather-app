@@ -6,6 +6,9 @@ import './components/WeatherCard.css';
 import { fetchWeather } from './api/weather';
 import SearchBox from './components/SearchBox';
 import Hello from './components/hello';
+import TimeThemeContainer from './components/TimeThemeContainer';
+import DateTimeDisplay from './components/DateTimeDisplay';
+
 // 한글 도시명을 영문으로 변환하는 매핑 객체
 const cityNameMapping = {
   '서울': 'Seoul',
@@ -76,12 +79,15 @@ function App() {
   }, []);
 
   return (
-    <div className="app-container">
-      <h1 className="app-title">날씨 앱 ⛅</h1>
+    <TimeThemeContainer>
+      <h1 className="app-title">날씨 앱 이름을 넣어주세요.</h1>
+
+      {/* 현재 날짜/요일/시간 표시 */}
+      <DateTimeDisplay />
+
       <Hello />
-      
+
       <CityButtons onCityClick={handleSearch} />
-      
       <SearchBox onSearch={handleSearch} />
 
       {error && <p className="error-message">{error}</p>}
@@ -95,7 +101,7 @@ function App() {
       ) : (
         <p className="loading-message">날씨 정보를 불러오는 중...</p>
       )}
-    </div>
+    </TimeThemeContainer>
   );
 }
 
