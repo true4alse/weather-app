@@ -40,18 +40,24 @@ const convertToEnglishCityName = (cityName) => {
 };
 
 // 도시 버튼 컴포넌트
-const CityButtons = ({ onCityClick }) => {
+const CityButtons = ({ isOpen, toggleDropdown, onCityClick, selectedCity }) => {
   return (
-    <div className="city-buttons-container">
-      {Object.keys(cityNameMapping).map((city) => (
-        <button
-          key={city}
-          onClick={() => onCityClick(city)}
-          className="city-button"
-        >
-          {city}
-        </button>
-      ))}
+    <div className="city-dropdown">
+      <button className="dropdown-toggle" onClick={toggleDropdown}>
+        {selectedCity || '도시 선택'}
+      </button>
+
+      <div className={`city-buttons-container ${isOpen ? 'on' : ''}`}>
+        {Object.keys(cityNameMapping).map((city) => (
+          <button
+            key={city}
+            onClick={() => onCityClick(city)}
+            className={`city-button ${selectedCity === city ? 'active' : ''}`}
+          >
+            {city}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
@@ -60,6 +66,12 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(null);
   const [searchCity, setSearchCity] = useState('서울');
+
+  // 🔹 드롭다운 열림/닫힘 상태
+  const [isOpen, setIsOpen] = useState(false);
+
+  // 🔹 선택된 도시 상태
+  const [selectedCity, setSelectedCity] = useState('서울');
 
   const handleSearch = async (city) => {
     try {
@@ -72,6 +84,17 @@ function App() {
       setError('도시를 찾을 수 없습니다.');
       setWeather(null);
     }
+  };
+
+  // 도시 버튼 클릭 시
+  const handleCityClick = (city) => {
+    setSelectedCity(city);   // 버튼에 active 표시용
+    handleSearch(city);      // 날씨 API 호출
+    setIsOpen(false);        // 드롭다운 닫기
+  };
+
+  const toggleDropdown = () => {
+    setIsOpen((prev) => !prev);
   };
 
   useEffect(() => {
@@ -87,7 +110,13 @@ function App() {
 
       <Hello />
 
-      <CityButtons onCityClick={handleSearch} />
+      <CityButtons
+        isOpen={isOpen}
+        toggleDropdown={toggleDropdown}
+        selectedCity={selectedCity}
+        onCityClick={handleCityClick}
+      />
+
       <SearchBox onSearch={handleSearch} />
 
       {error && <p className="error-message">{error}</p>}

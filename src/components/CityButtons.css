@@ -1,23 +1,117 @@
-.city-buttons-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px;
-  justify-content: center;
-}
-
-.city-button {
-  padding: 8px 16px;
-  margin: 4px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  background-color: #f0f0f0;
-  cursor: pointer;
-  transition: all 0.2s ease;
+/* 드롭다운 전체 래퍼 */
+.city-dropdown {
+  position: relative;
+  width: 220px;
+  margin: 16px auto 24px;
   font-size: 14px;
 }
 
+/* 드롭다운 열기 버튼 */
+.dropdown-toggle {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #d3d7e0;
+  background: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.1s ease, background-color 0.2s ease;
+}
+
+.dropdown-toggle:hover {
+  border-color: #b4b9c8;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  background-color: #fafbff;
+  transform: translateY(-1px);
+}
+
+.dropdown-toggle:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-toggle::after {
+  content: "▾";
+  font-size: 12px;
+  margin-left: 8px;
+  opacity: 0.7;
+}
+
+.dropdown-toggle.open::after {
+  transform: rotate(180deg);
+  transition: transform 0.2s ease;
+}
+
+/* -----------------------------
+   드롭다운 목록 박스
+------------------------------ */
+
+.city-buttons-container {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e3e6f0;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+  box-sizing: border-box;
+
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0; /* 닫혀 있을 때는 패딩 0 */
+  transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
+  z-index: 20;
+}
+
+/* 열렸을 때 */
+.city-buttons-container.on {
+  max-height: 260px;  /* 도시 개수에 맞게 조정 가능 */
+  opacity: 1;
+  padding: 8px;
+}
+
+/* 스크롤 생기면 예쁘게 */
+.city-buttons-container.on {
+  overflow-y: auto;
+}
+
+/* -----------------------------
+   드롭다운 아이템 버튼
+------------------------------ */
+
+.city-button {
+  width: 100%;
+  padding: 8px 10px;
+  margin: 2px 0;
+  text-align: left;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+  transition: background-color 0.15s ease, transform 0.1s ease,
+    color 0.15s ease;
+}
+
 .city-button:hover {
-  background-color: #e0e0e0;
-  transform: scale(1.05);
-} 
+  background-color: #f3f4ff;
+  transform: translateY(-1px);
+}
+
+.city-button:active {
+  transform: translateY(0);
+}
+
+/* 선택된 도시(active) 스타일 */
+.city-button.active {
+  background: #e1e6ff;
+  color: #1d3cff;
+  font-weight: 600;
+}
