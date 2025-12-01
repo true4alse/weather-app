@@ -12,6 +12,7 @@
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
+  background:url("/public/day.jpg") no-repeat 50% 50%;
 }
 
 .app-title {
